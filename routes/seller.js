@@ -7,6 +7,6 @@ const upload = multer({ dest: 'uploads/' });
 
 router.post("/signup", auth, sellerControllers.Signup);
 router.post("/signin", auth, sellerControllers.Signin);
-router.post("/product", auth, upload.single('image'), sellerControllers.createProduct);
+router.post("/product",  sellerControllers.createProduct);
 
 module.exports = router;

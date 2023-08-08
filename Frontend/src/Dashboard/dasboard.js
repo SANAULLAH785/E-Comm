@@ -20,7 +20,7 @@ const Dashboard = ({ onJoinClick }) => {
     };
 
     async function getProducts() {
-        const response = await axios.get('/purchaser/products');
+        const response = await axios.get('/products');
         return response.data;
     }
 

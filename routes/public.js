@@ -1,9 +1,23 @@
 const { Router } = require("express");
 const router = Router();
-
-// Show all the featured products
-router.get("/products", (req, res) => {
-  res.send("All the prodcts available");
-});
+const Product=require('../Models/ProductModel');
+// adminControllers.viewProducts = async (req, res) => {
+//   try {
+//     const products = await Product.find({});
+//     res.json(products);
+//   } catch (error) {
+//     console.error('Error fetching products:', error);
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// };
+//Show all the featured products
+router.get("/product", (req, res) => {
+  try {
+    const products =  Product.find({});
+    res.json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }});
 
 module.exports = router;
