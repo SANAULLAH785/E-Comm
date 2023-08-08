@@ -49,11 +49,11 @@ const AdminAuth = () => {
                 let signupEndpoint;
 
                 if (role === "seller") {
-                    signupEndpoint = "http://localhost:4000/seller/signup";
+                    signupEndpoint = "/seller/signup";
                 } else if (role === "purchaser") {
-                    signupEndpoint = "http://localhost:4000/purchaser/signup";
+                    signupEndpoint = "/purchaser/signup";
                 } else if (role === "admin") {
-                    signupEndpoint = "http://localhost:4000/admin/signup";
+                    signupEndpoint = "/admin/signup";
                 }
 
                 const response = await axios.post(signupEndpoint, {
@@ -72,11 +72,11 @@ const AdminAuth = () => {
                 let loginEndpoint;
 
                 if (role === "seller") {
-                    loginEndpoint = "http://localhost:4000/seller/signin";
+                    loginEndpoint = "/seller/signin";
                 } else if (role === "purchaser") {
-                    loginEndpoint = "http://localhost:4000/purchaser/signin";
+                    loginEndpoint = "/purchaser/signin";
                 } else if (role === "admin") {
-                    loginEndpoint = "http://localhost:4000/admin/signin";
+                    loginEndpoint = "/admin/signin";
                 }
 
                 const response = await axios.post(loginEndpoint, {
