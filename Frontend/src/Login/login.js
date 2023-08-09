@@ -102,8 +102,8 @@ const AdminAuth = () => {
         // console.log('first',error.response.data);
           console.log(errorMessage);
         toast.error(error.response.data);
-      } else {
-        toast.error("An error occurred during login/signup");
+      } else if(error.response && error.response.status===401){
+        toast.error(error.response.data);
       }
     }
   };
