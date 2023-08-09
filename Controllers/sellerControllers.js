@@ -6,9 +6,20 @@ require("dotenv").config();
 const jwtSecret = process.env.jwtSecret;
 const jwt = require("jsonwebtoken");
 // const { uploadFile, getFileStream } = require('../Middleware/imageupload')
-const { uploadFile, getFileStream } = require('../Middleware/s3');
+// const { uploadFile, getFileStream } = require('../Middleware/s3');
+
+// //
+// const multer = require('multer');
+// const fs = require("fs");
+
+// const cloudinary = require('cloudinary').v2; // Import the cloudinary object
+// cloudinary.config({
+//   cloud_name:'dufg9gvng',
+//   api_key:'976463835649686',
+//   api_secret:'UVR2Hbjqz7pP-s26533dmpHTWH4'  });
 
 
+//
 const sellerControllers = {};
 
 sellerControllers.Signup = async (req, res) => {
@@ -69,22 +80,22 @@ sellerControllers.createProduct = async (req, res) => {
             return res.status(400).send('Product already exists with this name');
         }
 
-        if (!req.file) {
-            return res.status(400).send('No image uploaded');
-        }
-        const file = req.file
+        // if (!req.file) {
+        //     return res.status(400).send('No image uploaded');
+        // }
+        // const file = req.file
 
-        const uploadedImage = await uploadFile(file);
-        console.log('s3key')
-        console.log(uploadedImage);
+        // const result = await cloudinary.uploader.upload(req.file.path);
+        console.log(req.imageUrl);
+
         const newProduct = new Product({
             product_name: name,
             description: description,
             quantity: quantity,
             price: price,
             sellerId: req.user.userid, // Assuming you have this information in your authentication middleware
-            image_key: uploadedImage.Key,
-            image_url: uploadedImage.Location,
+            
+            image_key: req.imageUrl
         });
         
 

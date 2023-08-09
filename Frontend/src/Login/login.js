@@ -91,7 +91,7 @@ const AdminAuth = () => {
                     localStorage.setItem("adminToken", token);
                     console.log(token);
                     if (token) {
-                        // navigate('/addProduct')
+                        navigate('/addProduct')
                     }
                     //   console.log(image_url);
                     // Handle successful login, e.g., show a success message or redirect

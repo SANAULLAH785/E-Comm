@@ -11,7 +11,7 @@ const Product=require('../Models/ProductModel');
 //   }
 // };
 //Show all the featured products
-router.get("/product", async (req, res) => {
+router.get("/products", async (req, res) => {
   try {
     const products = await Product.find({});
      // Await the query execution
