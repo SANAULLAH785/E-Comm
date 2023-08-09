@@ -18,6 +18,7 @@ const Dashboard = ({ onJoinClick }) => {
 
     async function getProducts() {
         const response = await axios.get('/product');
+        
         return response.data;
     }
 
@@ -71,7 +72,7 @@ const Dashboard = ({ onJoinClick }) => {
                                     <Typography variant="body2" color="textSecondary">
                                         Price: ${product.price}
                                     </Typography>
-                                    <img src={product.image_url} alt={product.product_name} />
+                                    <img src={product.image_key} alt={product.product_name} />
                                 </div>
                             </Grid>
                         ))}

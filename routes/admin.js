@@ -6,8 +6,8 @@ const router = Router();
 
 
 // Can view Products
-router.post("/signup",auth,adminControllers.signUp);
-router.post("/signin",auth,adminControllers.signIn);
+router.post("/signup",adminControllers.signUp);
+router.post("/signin",adminControllers.signIn);
  router.get("/products", auth, adminControllers.viewProducts);
 
 // // Can view Sellers

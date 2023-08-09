@@ -5,7 +5,8 @@ const bcrypt = require('bcrypt');
 require("dotenv").config();
 const jwtSecret = process.env.jwtSecret;
 const jwt = require("jsonwebtoken");
-const { uploadFile, getFileStream } = require('../Middleware/imageupload')
+// const { uploadFile, getFileStream } = require('../Middleware/imageupload')
+const { uploadFile, getFileStream } = require('../Middleware/s3');
 
 
 const sellerControllers = {};
@@ -71,9 +72,11 @@ sellerControllers.createProduct = async (req, res) => {
         if (!req.file) {
             return res.status(400).send('No image uploaded');
         }
+        const file = req.file
 
-        const uploadedImage = await uploadFile(req.file);
-
+        const uploadedImage = await uploadFile(file);
+        console.log('s3key')
+        console.log(uploadedImage);
         const newProduct = new Product({
             product_name: name,
             description: description,
@@ -83,9 +86,11 @@ sellerControllers.createProduct = async (req, res) => {
             image_key: uploadedImage.Key,
             image_url: uploadedImage.Location,
         });
+        
 
         await newProduct.save();
-        return res.status(201).send('Product created');
+        return res.status(201).send(newProduct);
+        
     } catch (error) {
         console.error(error);
         return res.status(500).send('Internal Server Error');
