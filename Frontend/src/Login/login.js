@@ -99,7 +99,6 @@ const AdminAuth = () => {
     } catch (error) {
         console.log(error);
       if (error.response && error.response.status === 400) {
-        console.log(first)
         const errorMessage =error.response.data.message;
         console.log('first',error.response.data);
           console.log(errorMessage);
