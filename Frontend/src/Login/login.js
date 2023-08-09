@@ -99,7 +99,8 @@ const AdminAuth = () => {
     } catch (error) {
       if (error.response && error.response.status === 400) {
         const errorMessage =
-          error.response.data.message || "User with this email already exist";
+          error.response.data.message;
+          console.log(errorMessage);
         toast.error(errorMessage);
       } else {
         toast.error("An error occurred during login/signup");
