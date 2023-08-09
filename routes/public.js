@@ -11,13 +11,14 @@ const Product=require('../Models/ProductModel');
 //   }
 // };
 //Show all the featured products
-router.get("/product", (req, res) => {
+router.get("/product", async (req, res) => {
   try {
-    const products =  Product.find({});
+    const products = await Product.find({}); // Await the query execution
     res.json(products);
   } catch (error) {
     console.error('Error fetching products:', error);
     res.status(500).json({ error: 'Internal Server Error' });
-  }});
+  }
+});
 
 module.exports = router;

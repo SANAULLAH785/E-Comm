@@ -13,9 +13,7 @@ const db = require('./database/dbconnection');
 const User = require('./Models/UsersModel');
 app.use(routes);
 
-app.get('/products',(req,res)=>{
-  res.status(200);
-})
+
 app.use(express.static(path.join(__dirname, "./Frontend/build")));
 app.get("*", function (_, res) {
     res.sendFile(
