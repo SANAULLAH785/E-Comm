@@ -11,7 +11,6 @@ function App() {
   const [joined, setJoined] = useState(false);
 //  const token= localStorage.getItem("adminToken");
  const [user, setUser]= useState(localStorage.getItem("adminToken"))
- debugger
 
  useEffect(()=>{
   if(!user)

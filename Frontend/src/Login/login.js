@@ -87,7 +87,6 @@ const AdminAuth = () => {
                 if (response.status === 200) {
                     toast.success("Login Successful");
                     const token = response.data;
-                    debugger
                     localStorage.setItem("adminToken", token);
                     console.log(token);
                     if (token) {
