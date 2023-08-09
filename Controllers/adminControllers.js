@@ -42,7 +42,7 @@ adminControllers.signIn=async(req,res)=>{
     const ispassword=await bcrypt.compare(password,existinguser.password);
     if(!ispassword){
       console.log(existinguser.password);
-     return res.status(400).json({ error: "Incorrect password." });
+     return res.status(401).json({ error: "Incorrect password." });
     }
     const token=jwt.sign({userid:existinguser._id,username:existinguser.name},jstsecret)
     res.status(200).json({token});

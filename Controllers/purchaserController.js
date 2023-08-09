@@ -50,7 +50,7 @@ purchaserControllers.Signin = async (req, res) => {
       existingpurchaser.password
     );
     if (!isvalidpassword) {
-      return res.status(400).json({ error: "invalid password" });
+      return res.status(401).json({ error: "invalid password" });
     }
     const token = jwt.sign(
       { userid: existingpurchaser._id, username: existingpurchaser.name },

@@ -35,7 +35,7 @@ sellerControllers.Signin = async (req, res) => {
         }
         const isvalidpassword = await bcrypt.compare(password, existingseller.password);
         if (!isvalidpassword) {
-            return res.status(400).json({ error: 'invalid password' });
+            return res.status(401).send('Invalid Password');
         }
         const token = jwt.sign({ userid: existingseller._id, username: existingseller.name }, jwtSecret);
         res.status(200).send(token);
