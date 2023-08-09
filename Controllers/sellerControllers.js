@@ -59,8 +59,7 @@ sellerControllers.Signin = async (req, res) => {
 //    res.status(201).send("Product created");
 // };
 sellerControllers.createProduct = async (req, res) => {
-    const { name, description } = req.body;
-    const { path, filename } = req.file;
+    const { name, description, quantity, price } = req.body;
 
     try {
         const existingProduct = await Product.findOne({ product_name: name });
@@ -69,12 +68,20 @@ sellerControllers.createProduct = async (req, res) => {
             return res.status(400).send('Product already exists with this name');
         }
 
+        if (!req.file) {
+            return res.status(400).send('No image uploaded');
+        }
+
         const uploadedImage = await uploadFile(req.file);
 
         const newProduct = new Product({
             product_name: name,
             description: description,
+            quantity: quantity,
+            price: price,
+            sellerId: req.user.userid, // Assuming you have this information in your authentication middleware
             image_key: uploadedImage.Key,
+            image_url: uploadedImage.Location,
         });
 
         await newProduct.save();

@@ -13,7 +13,8 @@ const Product=require('../Models/ProductModel');
 //Show all the featured products
 router.get("/product", async (req, res) => {
   try {
-    const products = await Product.find({}); // Await the query execution
+    const products = await Product.find({});
+     // Await the query execution
     res.json(products);
   } catch (error) {
     console.error('Error fetching products:', error);

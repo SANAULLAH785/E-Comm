@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, Button, AppBar, Toolbar, IconButton, Grid, TextField } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { Container, Typography, AppBar, Toolbar, IconButton, Grid,Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../utils/routes';
-import AuthRoutes from '../routes/Auth';
 import "./dashboard.css";
 
 const Dashboard = ({ onJoinClick }) => {
     const [products, setProducts] = useState([]);
     const [showAuthRoutes, setShowAuthRoutes] = useState(false);
-    const [searchQuery, setSearchQuery] = useState('');
 
     const navigate = useNavigate();
 
     const handleJoinClick = () => {
-        // onJoinClick();
         navigate(ROUTES.AUTH_ROUTES.login);
     };
 
@@ -32,13 +29,9 @@ const Dashboard = ({ onJoinClick }) => {
         fetchProducts();
     }, []);
 
-
-    
-    
-
     const productRows = [];
-    for (let i = 0; i < products.length; i += 5) {
-        const productRow = products.slice(i, i + 5);
+    for (let i = 0; i < products.length; i += 4) {
+        const productRow = products.slice(i, i + 4);
         productRows.push(productRow);
     }
 
@@ -52,7 +45,6 @@ const Dashboard = ({ onJoinClick }) => {
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         E-commerce Website
                     </Typography>
-                  
                     <Button color="inherit" component={Link} to={ROUTES.ABOUT}>About</Button>
                     <Button color="inherit" component={Link} to={ROUTES.SERVICES}>Services</Button>
                     <Button color="inherit" component={Link} to={ROUTES.CONTACT}>Contact Us</Button>
@@ -68,11 +60,18 @@ const Dashboard = ({ onJoinClick }) => {
                             <Grid item xs={12} sm={6} md={4} lg={3} key={product._id}>
                                 <div sx={{ my: 2, p: 2, border: '1px solid #ccc' }}>
                                     <Typography variant="h5" component="h3" gutterBottom>
-                                        {product.name}
+                                        {product.product_name}
                                     </Typography>
                                     <Typography variant="body1" gutterBottom>
                                         {product.description}
                                     </Typography>
+                                    <Typography variant="body2" color="textSecondary">
+                                        Quantity: {product.quantity}
+                                    </Typography>
+                                    <Typography variant="body2" color="textSecondary">
+                                        Price: ${product.price}
+                                    </Typography>
+                                    <img src={product.image_url} alt={product.product_name} />
                                 </div>
                             </Grid>
                         ))}

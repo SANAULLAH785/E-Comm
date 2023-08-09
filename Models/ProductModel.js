@@ -13,11 +13,11 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  unit_price: {
+  price: {
     type: Number,
     required: true,
   },
-  seller_id: {
+  sellerId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Seller',
     required: true,
