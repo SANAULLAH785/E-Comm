@@ -9,9 +9,12 @@ const path = require("path")
 app.use(bodyParser.json()); // Parse JSON request body
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-const db = require('./database/dbconnection');
+// const db = require('./database/dbconnection');
 const User = require('./Models/UsersModel');
+const connectDB=require('./database/dbconnection');
+// const { url } = require('inspector');
 app.use(routes);
+const url =process.env.MongoUrl;
 
 
 app.use(express.static(path.join(__dirname, "./Frontend/build")));
@@ -24,8 +27,21 @@ app.get("*", function (_, res) {
     );
   });
   
-
-app.listen(port, (err) => {
-    if (err) console.log(err)
+const start =async()=>{
+try
+{
+  await connectDB(url);
+  app.listen(port,()=>{
     console.log('sever is running at port', port);
-})
+
+  })
+}catch(error){
+  console.log(error);
+
+}
+};
+start();
+// app.listen(port, (err) => {
+//     if (err) console.log(err)
+//     console.log('sever is running at port', port);
+// })
