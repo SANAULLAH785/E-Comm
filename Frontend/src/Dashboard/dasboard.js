@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, AppBar, Toolbar, IconButton, Grid,Button } from '@mui/material';
+import { Container, Typography, AppBar, Toolbar, IconButton, Grid,Button} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit'; 
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../utils/routes';
@@ -36,9 +38,17 @@ const Dashboard = ({ onJoinClick }) => {
         productRows.push(productRow);
     }
 
-    return (
+    const handleUpdateClick = (product) => {
+        // Implement your update functionality here
+    };
+
+    const handleDeleteClick = (productId) => {
+        // Implement your delete functionality here
+    };
+
+    return  (
         <Container maxWidth="lg">
-            <AppBar position="static" sx={{ width: '100%', ml: 0, mr: 0 }}>
+            <AppBar position="static" sx={{ width: '100%', ml: 0, mr: 0 }} style={{ backgroundColor: '#13212e' }}>
                 <Toolbar>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <MenuIcon />
@@ -54,12 +64,12 @@ const Dashboard = ({ onJoinClick }) => {
                     ) : null}
                 </Toolbar>
             </AppBar>
-            <div>
+            <div style={{marginTop:'5px'}}>
                 {productRows.map((productRow, rowIndex) => (
                     <Grid container spacing={2} key={rowIndex}>
                         {productRow.map((product) => (
                             <Grid item xs={12} sm={6} md={4} lg={3} key={product._id}>
-                                <div sx={{ my: 2, p: 2, border: '1px solid #ccc' }}>
+                                <div sx={{ my: 2, p: 1, border: '1px solid black' }} style={{border:'1px solid black',padding:'1px'}}>
                                     <Typography variant="h5" component="h3" gutterBottom>
                                         {product.product_name}
                                     </Typography>
@@ -72,7 +82,15 @@ const Dashboard = ({ onJoinClick }) => {
                                     <Typography variant="body2" color="textSecondary">
                                         Price: ${product.price}
                                     </Typography>
-                                    <img style={{width:'100%', height:'200px',objectFit:'contain',objectPosition:'center'}} src={product.image_key} alt={product.product_name} />
+                                    <img style={{ width: '100%', height: '200px', objectFit: 'contain', objectPosition: 'center' }} src={product.image_key} alt={product.product_name} />
+                                    {/* <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '8px' }}> */}
+                                        <IconButton color="success" aria-label="Edit" onClick={() => handleUpdateClick(product)}>
+                                            <EditIcon />
+                                        </IconButton>
+                                        <IconButton color="warning" aria-label="Delete" onClick={() => handleDeleteClick(product._id)}>
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    {/* </div> */}
                                 </div>
                             </Grid>
                         ))}

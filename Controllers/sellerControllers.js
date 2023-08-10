@@ -13,7 +13,7 @@ sellerControllers.Signup = async (req, res) => {
         const { name, email, password } = req.body;
         const existingUser = await Seller.findOne({ email });
         if (existingUser) {
-            return res.status(400).json({ error: 'Seller with this email already exists' });
+            return res.status(400).send('Seller with this email already exists' );
         }
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(password, salt);

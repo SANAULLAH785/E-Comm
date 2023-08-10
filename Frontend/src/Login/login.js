@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
+
 const roles = [
   {
     value: "seller",
@@ -63,11 +64,16 @@ const AdminAuth = () => {
         });
 
         if (response.status === 201) {
-          toast.success("Signup Successful");
-          // Handle successful signup, e.g., show a success message or redirect
-        } else {
-          toast.error("Signup error");
-        }
+            toast.success("Signup Successful");
+            // Handle successful signup, e.g., show a success message or redirect
+          } else if (response.status === 400) {
+            toast.error(response.data.error);
+            console.log('first',response.data.error);
+            // Handle validation errors or other bad requests
+          } else {
+            toast.error("An error occurred. Please try again later.");
+            // Handle other status codes
+          }
       } else {
         let loginEndpoint;
 
@@ -90,21 +96,27 @@ const AdminAuth = () => {
           localStorage.setItem("adminToken", token);
           console.log(token);
           if (token && role==="seller") {
-            navigate("/addProduct");
+            navigate("/");
           }
         } else {
             navigate("/");
         }
       }
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        const errorMessage =error.response.data;
-        // console.log('first',error.response.data);
-          console.log(errorMessage);
-        toast.error(error.response.data);
-      } else if(error.response && error.response.status===401){
-        toast.error(error.response.data);
-      }
+        if (error.response && error.response.status === 400) {
+            const errorMessage = error.response.data;
+            // console.log('first', error.response.data);
+            console.log(errorMessage);
+            toast.error(errorMessage);
+          } else if (error.response && error.response.status === 401) {
+            const errorMessage = error.response.data;
+            // Handle unauthorized access
+            toast.error(errorMessage);
+          } else {
+            console.error("An error occurred:", error);
+            toast.error("An error occurred. Please try again later.");
+          }
+    
     }
   };
 
