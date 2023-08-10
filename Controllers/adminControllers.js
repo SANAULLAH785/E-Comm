@@ -19,7 +19,7 @@ adminControllers.signUp = async (req, res) => {
     const { name, email, password } = req.body;
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ error: 'User with this email already exists' });
+      return res.status(400).send('User with this email already exists' );
     }
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
@@ -42,10 +42,10 @@ adminControllers.signIn=async(req,res)=>{
     const ispassword=await bcrypt.compare(password,existinguser.password);
     if(!ispassword){
       console.log(existinguser.password);
-     return res.status(401).json({ error: "Incorrect password." });
+     return res.status(401).send( "Incorrect password." );
     }
     const token=jwt.sign({userid:existinguser._id,username:existinguser.name},jstsecret)
-    res.status(200).json({token});
+    res.status(200).send(token);
   }
   catch(err){
     res.status(500).json("Falid to login as admin")
