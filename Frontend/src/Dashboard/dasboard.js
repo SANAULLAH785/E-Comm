@@ -15,7 +15,16 @@ const Dashboard = ({ onJoinClick }) => {
     const navigate = useNavigate();
 
     const handleJoinClick = () => {
-        navigate(ROUTES.AUTH_ROUTES.login);
+        const token= localStorage.getItem("adminToken")
+        if(token){
+        navigate(ROUTES.PROTECTED_ROUTES_NAMES.addproduct);
+
+        }
+        else{
+            navigate(ROUTES.AUTH_ROUTES.login);
+
+        }
+
     };
 
     async function getProducts() {
