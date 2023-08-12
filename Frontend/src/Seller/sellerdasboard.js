@@ -31,7 +31,7 @@ const SellerDashboard = ({ onJoinClick }) => {
     };
 
     async function getProducts() {
-        const response = await axios.get('http://localhost:4000/products');
+        const response = await axios.get('/products');
         
         return response.data;
     }
