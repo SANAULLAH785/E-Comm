@@ -50,11 +50,11 @@ const AdminAuth = () => {
         let signupEndpoint;
 
         if (role === "seller") {
-          signupEndpoint = "/seller/signup";
+          signupEndpoint = "http://localhost:4000/seller/signup";
         } else if (role === "purchaser") {
-          signupEndpoint = "/purchaser/signup";
+          signupEndpoint = "http://localhost:4000/purchaser/signup";
         } else if (role === "admin") {
-          signupEndpoint = "/admin/signup";
+          signupEndpoint = "http://localhost:4000/admin/signup";
         }
 
         const response = await axios.post(signupEndpoint, {
@@ -78,11 +78,11 @@ const AdminAuth = () => {
         let loginEndpoint;
 
         if (role === "seller") {
-          loginEndpoint = "/seller/signin";
+          loginEndpoint = "http://localhost:4000/seller/signin";
         } else if (role === "purchaser") {
-          loginEndpoint = "/purchaser/signin";
+          loginEndpoint = "http://localhost:4000/purchaser/signin";
         } else if (role === "admin") {
-          loginEndpoint = "/admin/signin";
+          loginEndpoint = "http://localhost:4000/admin/signin";
         }
 
         const response = await axios.post(loginEndpoint, {
@@ -96,10 +96,13 @@ const AdminAuth = () => {
           localStorage.setItem("adminToken", token);
           console.log(token);
           if (token && role==="seller") {
-            navigate("/");
+            navigate("/sellerdashboard");
           }
-        } else {
-            navigate("/");
+          else if(token && role==="purchaser") {
+            navigate("/purchaserdashboard");
+        }
+        } else{
+          navigate('/');
         }
       }
     } catch (error) {

@@ -16,7 +16,7 @@ const ProtectedRoutes = () => (
      ) ))}
     <Route
       path={ROUTES.AUTH_ROUTES.login}
-      element={<Navigate to='/addProduct' replace />}
+      element={<Navigate to='/login' replace />}
     />
     
     {/* For nested Routes Example */}

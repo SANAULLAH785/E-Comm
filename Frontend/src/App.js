@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Dashboard from './Dashboard/dasboard';
 import AuthRoutes from './routes/Auth';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import PublicRoutes from './routes/PublicRoutes';
 
 import "./App.css";
+import { ROUTES } from './utils/routes';
+import AddProduct from './Seller/addproduct';
+import SellerDashboard from './Seller/sellerdasboard';
+import PurchaserDashboard from './Purchaser/purchaserdashboard';
 
 function App() {
   const [joined, setJoined] = useState(false);
@@ -23,7 +27,13 @@ function App() {
   return (
     <div className="App">
        <Router>
+
        <PublicRoutes/>
+       <Routes>
+        <Route path="/product" element={<AddProduct/>}></Route>
+        <Route path="/sellerdashboard" element={<SellerDashboard/>}></Route>
+        <Route path="/purchaserdashboard" element={<PurchaserDashboard/>}></Route>
+       </Routes>
 
         {!user ? (
           <AuthRoutes />
@@ -31,6 +41,7 @@ function App() {
           <ProtectedRoutes/>
         )}
       </Router>
+
     </div>
   );
 }

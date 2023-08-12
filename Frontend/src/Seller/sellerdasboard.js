@@ -7,10 +7,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../utils/routes';
 import AddProduct from '../Seller/addproduct';
-import "./dashboard.css";
+// import "./dashboard.css";
 import { toast } from 'react-hot-toast';
 
-const Dashboard = ({ onJoinClick }) => {
+const SellerDashboard = ({ onJoinClick }) => {
     const [products, setProducts] = useState([]);
     const [showAuthRoutes, setShowAuthRoutes] = useState(false);
 
@@ -21,17 +21,15 @@ const Dashboard = ({ onJoinClick }) => {
         if(token){
             navigate('/');
             toast.success("Alrady Login")
+
         }
         else{
             navigate(ROUTES.AUTH_ROUTES.login);
-        }
-    };
-   const handelLogoutClick =()=>{
-    localStorage.removeItem("adminToken");
-    toast.success("Log Out Successfully");
 
-    navigate('/');
-   }
+        }
+
+    };
+
     async function getProducts() {
         const response = await axios.get('http://localhost:4000/products');
         
@@ -52,12 +50,17 @@ const Dashboard = ({ onJoinClick }) => {
         productRows.push(productRow);
     }
 
-    // const handleUpdateClick = (product) => {
-    //     // Implement your update functionality here
-    // };
+    const handleUpdateClick = (product) => {
+        // Implement your update functionality here
+    };
 
-    // const handleDeleteClick = (productId) => {
-    // };
+    const handleDeleteClick = (productId) => {
+    };
+    const handelLogout=()=>{
+     localStorage.removeItem("adminToken");
+     toast.success("Log Out Successfully");
+     navigate('/');
+    };
 
     return  (
         <Container maxWidth="lg">
@@ -72,11 +75,11 @@ const Dashboard = ({ onJoinClick }) => {
                     <Button color="inherit" component={Link} to={ROUTES.ABOUT}>About</Button>
                     <Button color="inherit" component={Link} to={ROUTES.SERVICES}>Services</Button>
                     <Button color="inherit" component={Link} to={ROUTES.CONTACT}>Contact Us</Button>
-                    {/* <Button color="inherit" onClick={()=>navigate('/product')} >AddProduct</Button> */}
-                    <Button color="inherit" onClick={handelLogoutClick}  style={{backgroundColor:'#13212e'}}>Log Out </Button>
+                    <Button color="inherit" onClick={()=>navigate('/product')}  style={{backgroundColor:'#13212e'}} >AddProduct</Button>
+                    <Button color='inherit' onClick={handelLogout}  style={{backgroundColor:'#13212e'}}>Log Out</Button>
 
                     {!showAuthRoutes ? (
-                        <Button color="inherit" onClick={handleJoinClick} style={{backgroundColor:'#13212e',marginLefts:'3px'}}>Login</Button>
+                        <Button color="inherit" onClick={handleJoinClick} style={{backgroundColor:'green'}}>Login</Button>
                     ) : null}
                 </Toolbar>
             </AppBar>
@@ -100,12 +103,12 @@ const Dashboard = ({ onJoinClick }) => {
                                     </Typography>
                                     <img style={{ width: '100%', height: '200px', objectFit: 'contain', objectPosition: 'center' }} src={product.image_key} alt={product.product_name} />
                                     {/* <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '8px' }}> */}
-                                        {/* <IconButton color="success" aria-label="Edit" onClick={() => handleUpdateClick(product)}>
+                                        <IconButton color="success" aria-label="Edit" onClick={() => handleUpdateClick(product)}>
                                             <EditIcon />
                                         </IconButton>
                                         <IconButton color="error" aria-label="Delete" onClick={() => handleDeleteClick(product._id)}>
                                             <DeleteIcon />
-                                        </IconButton> */}
+                                        </IconButton>
                                     {/* </div> */}
                                 </div>
                             </Grid>
@@ -117,4 +120,4 @@ const Dashboard = ({ onJoinClick }) => {
     );
 };
 
-export default Dashboard;
+export default SellerDashboard;

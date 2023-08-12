@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, AppBar, Toolbar, IconButton, Grid,Button} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit'; 
+
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../utils/routes';
-import AddProduct from '../Seller/addproduct';
-import "./dashboard.css";
+// import "./dashboard.css";
 import { toast } from 'react-hot-toast';
 
-const Dashboard = ({ onJoinClick }) => {
+const PurchaserDashboard = ({ onJoinClick }) => {
     const [products, setProducts] = useState([]);
     const [showAuthRoutes, setShowAuthRoutes] = useState(false);
 
@@ -21,17 +19,15 @@ const Dashboard = ({ onJoinClick }) => {
         if(token){
             navigate('/');
             toast.success("Alrady Login")
+
         }
         else{
             navigate(ROUTES.AUTH_ROUTES.login);
-        }
-    };
-   const handelLogoutClick =()=>{
-    localStorage.removeItem("adminToken");
-    toast.success("Log Out Successfully");
 
-    navigate('/');
-   }
+        }
+
+    };
+
     async function getProducts() {
         const response = await axios.get('http://localhost:4000/products');
         
@@ -58,6 +54,11 @@ const Dashboard = ({ onJoinClick }) => {
 
     // const handleDeleteClick = (productId) => {
     // };
+    const handelLogout=()=>{
+     localStorage.removeItem("adminToken");
+     toast.success("Log Out Successfully");
+     navigate('/');
+    };
 
     return  (
         <Container maxWidth="lg">
@@ -72,11 +73,12 @@ const Dashboard = ({ onJoinClick }) => {
                     <Button color="inherit" component={Link} to={ROUTES.ABOUT}>About</Button>
                     <Button color="inherit" component={Link} to={ROUTES.SERVICES}>Services</Button>
                     <Button color="inherit" component={Link} to={ROUTES.CONTACT}>Contact Us</Button>
+                    <Button color="inherit" onClick={handelLogout} style={{backgroundColor:'#13212e'}}>Log Out</Button>
+
                     {/* <Button color="inherit" onClick={()=>navigate('/product')} >AddProduct</Button> */}
-                    <Button color="inherit" onClick={handelLogoutClick}  style={{backgroundColor:'#13212e'}}>Log Out </Button>
 
                     {!showAuthRoutes ? (
-                        <Button color="inherit" onClick={handleJoinClick} style={{backgroundColor:'#13212e',marginLefts:'3px'}}>Login</Button>
+                        <Button color="inherit" onClick={handleJoinClick}style={{backgroundColor:'#13212e'}}>Login</Button>
                     ) : null}
                 </Toolbar>
             </AppBar>
@@ -117,4 +119,4 @@ const Dashboard = ({ onJoinClick }) => {
     );
 };
 
-export default Dashboard;
+export default PurchaserDashboard;
