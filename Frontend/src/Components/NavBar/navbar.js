@@ -12,17 +12,15 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import Badge from '@mui/material/Badge';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
 import CartIcon from '../Cart/CartIcon'; 
-import { ShoppingCart } from '@mui/icons-material';
-import { toast } from 'react-hot-toast';
+
 
 
 const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout']; // still did not implement 
 
 function NavBar({ onLogout, loggedIn, isSeller,cartCount }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
