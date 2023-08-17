@@ -14,7 +14,7 @@ async function postImage({ image, description, name ,quantity,price}) {
   formData.append('price', price);
 
 
-  const result = await axios.post('/seller/product', formData, {
+  const result = await axios.post('http://localhost:4000/seller/product', formData, {
     headers: { 
       'Content-Type': 'multipart/form-data',
       token:localStorage.getItem("adminToken"),
@@ -52,7 +52,7 @@ function AddProduct() {
       setPrice('');
       setFile(null);
       toast.success('Product added succesfully');
-      navigate('/sellerdashboard')
+      navigate('/seller/dashboard')
     } catch (error) {
       console.error('Error uploading image:', error);
     }

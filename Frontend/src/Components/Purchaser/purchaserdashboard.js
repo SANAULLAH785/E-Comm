@@ -4,7 +4,7 @@ import { Container, Typography, AppBar, Toolbar, IconButton, Grid,Button} from '
 
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom';
-import { ROUTES } from '../utils/routes';
+import { ROUTES } from '../../utils/routes';
 // import "./dashboard.css";
 import { toast } from 'react-hot-toast';
 
@@ -29,7 +29,7 @@ const PurchaserDashboard = ({ onJoinClick }) => {
     };
 
     async function getProducts() {
-        const response = await axios.get('/products');
+        const response = await axios.get('http://localhost:4000/products');
         
         return response.data;
     }

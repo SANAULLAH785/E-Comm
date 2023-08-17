@@ -13,7 +13,7 @@ sellerControllers.Signup = async (req, res) => {
         const { name, email, password } = req.body;
         const existingUser = await Seller.findOne({ email });
         if (existingUser) {
-            return res.status(400).send('Seller with this email already exists' );
+            return res.status(400).send('Seller with this email already exists');
         }
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(password, salt);
@@ -67,5 +67,57 @@ sellerControllers.createProduct = async (req, res) => {
         return res.status(500).send('Internal Server Error');
     }
 };
-
+sellerControllers.viewProduct = async (req, res) => {
+    try {
+        
+        const products = await Product.find({ sellerId: req.user.userid });
+        
+        res.json(products);
+    } catch (error) {
+        res.status(500).json({ message: "Failed to fetch seller products" });
+    }
+};
+sellerControllers.editProduct = async (req, res) => {
+    console.log(req.body);
+    const { id } = req.params;
+    console.log(req.body);
+  
+    try {
+      const product = await Product.findById(id);
+      if (!product) {
+        return res.status(404).json({ error: "Product with this ID not found." });
+      }
+  
+      const { name, description, price ,quantity} = req.body;
+      product.name = name || product.name;
+      product.description = description || product.description;
+      product.price = price || product.price;
+      product.imageUrl = req.imageUrl || product.imageUrl;
+      product.quantity=quantity || product.quantity;
+  
+      await product.save();
+  
+      res.send(`Edit Product with ID ${id} Successful`);
+    } catch (error) {
+      console.log(error,'error');
+      res.status(500).json({ message: "Failed to edit product fsdf" });
+    }
+  };
+  sellerControllers.deleteProduct = async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const product = await Product.findById(id);
+      if (!product) {
+        return res.status(404).json({ error: "Product with this ID not found." });
+      }
+      if (product.sellerId == req.user.userid) {
+        await Product.findByIdAndDelete(id);
+        return res.send(`Delete Product with ID ${id} Successful`);
+      }
+      res.status(201).json({ error: "Bad Request" });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to delete product" });
+    }
+  };
 module.exports = sellerControllers;

@@ -8,9 +8,9 @@ const auth = (req, res, next) => {
   }
   try {
     const decodedToken = jwt.verify(token, "sanaullah");
-    console.log(decodedToken);
+    // console.log(decodedToken);
     req.user = { userid: decodedToken.userid }; // Fix this line to assign the correct property name
-    console.log(req.user.userid);
+    // console.log(req.user.userid,'userid');
     next();
   } catch (error) {
     console.error(error);

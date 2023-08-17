@@ -3,7 +3,7 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { ROUTES } from '../utils/routes';
-import Login from '../Login/login';
+import Login from '../Components/Login/login';
 
 
 const AuthRoutes= () => (

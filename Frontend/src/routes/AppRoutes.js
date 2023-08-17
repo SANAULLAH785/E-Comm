@@ -1,9 +1,9 @@
 import { ROUTES } from "../utils/routes";
 import { ROLES } from "../utils/constants";
 import { Route } from "react-router-dom";
-import Dashboard from "../Dashboard/dasboard";
-import AddProduct from "../Seller/addproduct";
-import Login from '../Login/login';
+import Dashboard from "../Components/HomePage/HomePage";
+import AddProduct from "../Components/Seller/addproduct";
+import Login from '../Components/Login/login';
 
 export const PROTECTED_ROUTES = [
   // {
