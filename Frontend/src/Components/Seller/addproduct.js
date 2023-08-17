@@ -14,7 +14,7 @@ async function postImage({ image, description, name ,quantity,price}) {
   formData.append('price', price);
 
 
-  const result = await axios.post('http://localhost:4000/seller/product', formData, {
+  const result = await axios.post('/seller/product', formData, {
     headers: { 
       'Content-Type': 'multipart/form-data',
       token:localStorage.getItem("adminToken"),

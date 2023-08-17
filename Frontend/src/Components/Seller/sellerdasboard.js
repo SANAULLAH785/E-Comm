@@ -49,7 +49,7 @@ const SellerDashboard = ({ onJoinClick }) => {
                 price: editedProductPrice,
             };
             const response = await axios.put(
-                `http://localhost:4000/seller/editproduct/${selectedProduct._id}`,
+                `/seller/editproduct/${selectedProduct._id}`,
                 updatedProduct,
                 {
                     headers: {
@@ -76,7 +76,7 @@ const SellerDashboard = ({ onJoinClick }) => {
     const handleDeleteClick = async (productId) => {
         try {
             const response = await axios.delete(
-                `http://localhost:4000/seller/deleteproduct/${productId}`,
+                `/seller/deleteproduct/${productId}`,
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -97,7 +97,7 @@ const SellerDashboard = ({ onJoinClick }) => {
     async function getProducts() {
         try {
             const response = await axios.get(
-                "http://localhost:4000/seller/myproduct",
+                "/seller/myproduct",
                 {
                     headers: {
                         "Content-Type": "application/json",

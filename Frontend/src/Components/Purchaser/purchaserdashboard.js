@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, AppBar, Toolbar, IconButton, Grid,Button} from '@mui/material';
-
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../utils/routes';
+import NavBar from '../NavBar/navbar';
 // import "./dashboard.css";
 import { toast } from 'react-hot-toast';
 
@@ -29,7 +29,7 @@ const PurchaserDashboard = ({ onJoinClick }) => {
     };
 
     async function getProducts() {
-        const response = await axios.get('http://localhost:4000/products');
+        const response = await axios.get('/products');
         
         return response.data;
     }
@@ -61,8 +61,10 @@ const PurchaserDashboard = ({ onJoinClick }) => {
     };
 
     return  (
-        <Container maxWidth="lg">
-            <AppBar position="static" sx={{ width: '100%', ml: 0, mr: 0 }} style={{ backgroundColor: '#13212e' }}>
+        <Container maxWidth="2xl">
+            <NavBar></NavBar>
+
+            {/* <AppBar position="static" sx={{ width: '100%', ml: 0, mr: 0 }} style={{ backgroundColor: '#13212e' }}>
                 <Toolbar>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <MenuIcon />
@@ -73,15 +75,15 @@ const PurchaserDashboard = ({ onJoinClick }) => {
                     <Button color="inherit" component={Link} to={ROUTES.ABOUT}>About</Button>
                     <Button color="inherit" component={Link} to={ROUTES.SERVICES}>Services</Button>
                     <Button color="inherit" component={Link} to={ROUTES.CONTACT}>Contact Us</Button>
-                    <Button color="inherit" onClick={handelLogout} style={{backgroundColor:'#13212e'}}>Log Out</Button>
+                    <Button color="inherit" onClick={handelLogout} style={{backgroundColor:'#13212e'}}>Log Out</Button> */}
 
                     {/* <Button color="inherit" onClick={()=>navigate('/product')} >AddProduct</Button> */}
-
+{/* 
                     {!showAuthRoutes ? (
                         <Button color="inherit" onClick={handleJoinClick}style={{backgroundColor:'#13212e'}}>Login</Button>
                     ) : null}
                 </Toolbar>
-            </AppBar>
+            </AppBar> */}
             <div style={{marginTop:'5px'}}>
                 {productRows.map((productRow, rowIndex) => (
                     <Grid container spacing={2} key={rowIndex}>

@@ -34,7 +34,7 @@ const HomePage = ({setCart,cart}) => {
     //     console.log(cart, 'cart of home ');
     //   }, [cart]);  
     async function getProducts() {
-        const response = await axios.get('http://localhost:4000/products');
+        const response = await axios.get('/products');
         
         return response.data;
     }
