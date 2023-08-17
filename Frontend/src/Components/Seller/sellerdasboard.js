@@ -136,7 +136,7 @@ const SellerDashboard = ({ onJoinClick }) => {
         navigate("/");
     };
     return (
-        <Container maxWidth="lg">
+        <Container maxWidth="2xl">
             <NavBar loggedIn={loggedIn} isSeller={isSeller} onLogout={handelLogout} />
             <div style={{ marginTop: "5px" }}>
                 {productRows.map((productRow, rowIndex) => (
